@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ level_name }} {{ subject.name }} {{ year }}{% endblock %}
+{% block body_class %}page-year{% endblock %}
+{% block breadcrumbs %}{% with crumbs=[(level_name, url_for('browse.level', level=level)), (subject.name, url_for('browse.subject', level=level, subject_slug=subject.slug)), (year|string, None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
+{% block content %}
+<h1>{{ level_name }} {{ subject.name }} {{ year }}</h1>
+<section class="paper-list-section" aria-labelledby="papers-heading">
+  <h2 id="papers-heading">Papers</h2>
+  <div class="paper-list">
+    {% for paper in papers %}{% include "partials/paper_card.html" %}{% endfor %}
+  </div>
+</section>
+{% endblock %}

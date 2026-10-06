@@ -1,0 +1,12 @@
+{# Expects `paper` (row from models._PAPER_SELECT) and LEVELS. #}
+<article class="paper-card" id="paper-{{ paper.id }}">
+  <h3 class="paper-card-title">
+    <a href="{{ url_for('browse.paper', paper_id=paper.id) }}">
+      {{ LEVELS[paper.level] }} {{ paper.subject_name }} {{ paper.year }}: {{ paper.title }}
+    </a>
+  </h3>
+  <ul class="paper-links">
+    <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper (PDF, sqa.org.uk)</a></li>
+    <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions (PDF, sqa.org.uk)</a>{% else %}Marking instructions not published by SQA{% endif %}</li>
+  </ul>
+</article>

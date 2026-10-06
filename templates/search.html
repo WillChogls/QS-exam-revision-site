@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Search papers{% endblock %}
+{% block body_class %}page-search{% endblock %}
+{% block breadcrumbs %}{% with crumbs=[('Search', None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
+{% block content %}
+<h1>Search past papers</h1>
+<form id="search-form" class="search-form" method="get" action="{{ url_for('search.search') }}" role="search">
+  <fieldset class="search-filters">
+    <legend>Filters</legend>
+    <p class="form-field">
+      <label for="search-level">Level</label>
+      <select id="search-level" name="level">
+        <option value="">Any level</option>
+        {% for slug, name in LEVELS.items() %}
+        <option value="{{ slug }}" {% if selected.level == slug %}selected{% endif %}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    <p class="form-field">
+      <label for="search-subject">Subject</label>
+      <select id="search-subject" name="subject">
+        <option value="">Any subject</option>
+        {% for s in subjects %}
+        <option value="{{ s.slug }}" {% if selected.subject == s.slug %}selected{% endif %}>{{ s.name }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    <p class="form-field">
+      <label for="search-year">Year</label>
+      <select id="search-year" name="year">
+        <option value="">Any year</option>
+        {% for y in years %}
+        <option value="{{ y }}" {% if selected.year == y %}selected{% endif %}>{{ y }}</option>
+        {% endfor %}
+      </select>
+    </p>
+  </fieldset>
+  <button type="submit" id="search-submit">Search</button>
+</form>
+<section id="search-results" class="search-results" aria-labelledby="results-heading">
+  <h2 id="results-heading">{% if searched %}Results{% else %}All papers{% endif %} ({{ results|length }})</h2>
+  {% if results %}
+  <div class="paper-list">
+    {% for paper in results %}{% include "partials/paper_card.html" %}{% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-state">No papers match those filters.</p>
+  {% endif %}
+</section>
+{% endblock %}

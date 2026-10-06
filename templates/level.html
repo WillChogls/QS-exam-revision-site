@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ level_name }}{% endblock %}
+{% block body_class %}page-level{% endblock %}
+{% block breadcrumbs %}{% with crumbs=[(level_name, None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
+{% block content %}
+<h1>{{ level_name }}</h1>
+<section class="subject-list-section" aria-labelledby="subjects-heading">
+  <h2 id="subjects-heading">Subjects</h2>
+  {% if subjects %}
+  <ul class="subject-list">
+    {% for s in subjects %}
+    <li class="subject-item"><a href="{{ url_for('browse.subject', level=level, subject_slug=s.slug) }}">{{ s.name }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty-state">No subjects have been added for {{ level_name }} yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

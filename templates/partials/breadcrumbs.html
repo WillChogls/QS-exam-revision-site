@@ -1,0 +1,11 @@
+{# crumbs: list of (label, url-or-None). Last item is the current page. #}
+<nav id="breadcrumbs" class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item"><a href="{{ url_for('browse.index') }}">Home</a></li>
+    {% for label, href in crumbs %}
+    <li class="breadcrumb-item">
+      {% if href and not loop.last %}<a href="{{ href }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</nav>

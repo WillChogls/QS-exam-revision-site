@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ level_name }} {{ subject.name }} coursework{% endblock %}
+{% block body_class %}page-coursework{% endblock %}
+{% block breadcrumbs %}{% with crumbs=[(level_name, url_for('browse.level', level=level)), (subject.name, url_for('browse.subject', level=level, subject_slug=subject.slug)), ('Coursework', None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
+{% block content %}
+<h1>{{ level_name }} {{ subject.name }} coursework</h1>
+<section class="coursework-list-section" aria-labelledby="coursework-heading">
+  <h2 id="coursework-heading">Assignments and projects</h2>
+  {% if items %}
+  {% for year, group in items|groupby("year")|reverse %}
+  <section class="coursework-year" aria-labelledby="coursework-year-{{ year }}">
+    <h3 id="coursework-year-{{ year }}">{{ year }}</h3>
+    <ul class="coursework-list">
+      {% for item in group %}
+      <li class="coursework-item" id="coursework-{{ item.id }}">
+        <a class="coursework-doc" href="{{ item.url }}" rel="noopener">{{ item.title }} (sqa.org.uk)</a>
+        {% if item.description %}<p class="coursework-description">{{ item.description }}</p>{% endif %}
+        {% if item.deadline %}<p class="coursework-deadline">Deadline: <time datetime="{{ item.deadline }}">{{ item.deadline }}</time></p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+  {% else %}
+  <p class="empty-state">SQA lists no coursework documents for this course.</p>
+  {% endif %}
+</section>
+{% endblock %}

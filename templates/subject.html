@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ level_name }} {{ subject.name }}{% endblock %}
+{% block body_class %}page-subject{% endblock %}
+{% block breadcrumbs %}{% with crumbs=[(level_name, url_for('browse.level', level=level)), (subject.name, None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
+{% block content %}
+<h1>{{ level_name }} {{ subject.name }}</h1>
+<section class="year-list-section" aria-labelledby="years-heading">
+  <h2 id="years-heading">Past papers by year</h2>
+  {% if years %}
+  <ul class="year-list">
+    {% for y in years %}
+    <li class="year-item"><a href="{{ url_for('browse.year', level=level, subject_slug=subject.slug, year=y) }}">{{ y }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty-state">No past papers have been added yet.</p>
+  {% endif %}
+</section>
+<section class="coursework-link-section" aria-labelledby="coursework-link-heading">
+  <h2 id="coursework-link-heading">Coursework</h2>
+  <p><a class="coursework-link" href="{{ url_for('coursework.coursework', level=level, subject_slug=subject.slug) }}">
+    {% if has_coursework %}Coursework guidance and deadlines{% else %}Coursework (none for this course){% endif %}
+  </a></p>
+</section>
+{% endblock %}

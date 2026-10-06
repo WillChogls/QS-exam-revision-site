@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SQA Revision{% endblock %} | SQA Revision</title>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header id="site-header" class="site-header">
+    <p class="site-title"><a href="{{ url_for('browse.index') }}">SQA Revision</a></p>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        {% for slug, name in LEVELS.items() %}
+        <li class="nav-item"><a href="{{ url_for('browse.level', level=slug) }}">{{ name }}</a></li>
+        {% endfor %}
+        <li class="nav-item"><a href="{{ url_for('search.search') }}">Search</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  {% block breadcrumbs %}{% endblock %}
+
+  <main id="main" class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer id="site-footer" class="site-footer">
+    <p>Past papers and marking instructions are linked from
+      <a href="https://www.sqa.org.uk/">sqa.org.uk</a> and remain &copy; SQA.</p>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
