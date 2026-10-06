@@ -3,10 +3,14 @@
 {% block body_class %}page-year{% endblock %}
 {% block breadcrumbs %}{% with crumbs=[(level_name, url_for('browse.level', level=level)), (subject.name, url_for('browse.subject', level=level, subject_slug=subject.slug)), (year|string, None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
 {% block content %}
-<h1>{{ level_name }} {{ subject.name }} {{ year }}</h1>
+<div class="page-heading">
+  <h1>{{ level_name }} {{ subject.name }} <span class="accent">{{ year }}</span></h1>
+  <p class="page-count">{{ papers|length }} paper{{ "s" if papers|length != 1 }}</p>
+</div>
 <section class="paper-list-section" aria-labelledby="papers-heading">
   <h2 id="papers-heading">Papers</h2>
   <div class="paper-list">
+    {% set compact = true %}
     {% for paper in papers %}{% include "partials/paper_card.html" %}{% endfor %}
   </div>
 </section>

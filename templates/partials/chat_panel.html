@@ -1,7 +1,9 @@
 {# Chat tutor panel (UI placeholder). Expects `paper`. Page context lives in data-* for chat.js. #}
-<section id="chat" class="chat" aria-labelledby="chat-heading">
-  <h2 id="chat-heading">AI tutor</h2>
-  <button type="button" id="chat-toggle" class="chat-toggle" aria-controls="chat-panel" aria-expanded="false">Show chat</button>
+<aside id="chat" class="chat" aria-labelledby="chat-heading">
+  <div class="chat-header">
+    <h2 id="chat-heading">AI tutor</h2>
+    <button type="button" id="chat-toggle" class="chat-toggle" aria-controls="chat-panel" aria-expanded="false">Show chat</button>
+  </div>
 
   <div id="chat-panel" class="chat-panel" hidden
        data-level="{{ paper.level }}"
@@ -14,18 +16,20 @@
     <p id="chat-empty" class="chat-empty">No messages yet.</p>
 
     <form id="chat-form" class="chat-form">
-      <p class="form-field chat-question-field">
-        <label for="chat-question">Question number (leave blank for the whole paper)</label>
-        <input type="number" id="chat-question" name="question" class="chat-question" min="1" step="1">
-      </p>
-      <p class="form-field chat-input-field">
-        <label for="chat-input">Your message</label>
-        <input type="text" id="chat-input" name="message" class="chat-input" autocomplete="off" required>
-      </p>
+      <div class="chat-fields">
+        <p class="form-field chat-question-field">
+          <label for="chat-question">Question<span class="visually-hidden"> number (leave blank for the whole paper)</span></label>
+          <input type="number" id="chat-question" name="question" class="chat-question" min="1" step="1" placeholder="All">
+        </p>
+        <p class="form-field chat-input-field">
+          <label for="chat-input">Your message</label>
+          <input type="text" id="chat-input" name="message" class="chat-input" autocomplete="off" placeholder="Ask about this paper…" required>
+        </p>
+      </div>
       <p class="chat-actions">
-        <button type="submit" id="chat-send" class="chat-send">Send</button>
         <button type="button" id="chat-clear" class="chat-clear">Clear chat</button>
+        <button type="submit" id="chat-send" class="chat-send">Send</button>
       </p>
     </form>
   </div>
-</section>
+</aside>

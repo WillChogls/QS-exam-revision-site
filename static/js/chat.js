@@ -45,6 +45,7 @@
     const author = document.createElement("p");
     author.className = "chat-message-author";
     author.textContent = role === "user" ? "You" : "Tutor";
+    if (role === "user" && question.value) author.textContent += " · Q" + question.value;
 
     const body = document.createElement("p");
     body.className = "chat-message-text";

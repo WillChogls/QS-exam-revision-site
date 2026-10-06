@@ -1,12 +1,14 @@
-{# Expects `paper` (row from models._PAPER_SELECT) and LEVELS. #}
+{# Expects `paper` (row from models._PAPER_SELECT) and LEVELS.
+   Set `compact` to show only the paper title (year page, where level/subject/year are in the heading). #}
 <article class="paper-card" id="paper-{{ paper.id }}">
+  <p class="paper-card-number" aria-hidden="true">{{ "%02d"|format(paper.paper_number) }}</p>
   <h3 class="paper-card-title">
     <a href="{{ url_for('browse.paper', paper_id=paper.id) }}">
-      {{ LEVELS[paper.level] }} {{ paper.subject_name }} {{ paper.year }}: {{ paper.title }}
+      {%- if compact %}{{ paper.title }}{% else %}{{ LEVELS[paper.level] }} {{ paper.subject_name }} {{ paper.year }}: {{ paper.title }}{% endif -%}
     </a>
   </h3>
   <ul class="paper-links">
-    <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper (PDF, sqa.org.uk)</a></li>
-    <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions (PDF, sqa.org.uk)</a>{% else %}Marking instructions not published by SQA{% endif %}</li>
+    <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper <span class="file-meta">PDF</span><span class="visually-hidden">, sqa.org.uk</span></a></li>
+    <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions <span class="file-meta">PDF</span><span class="visually-hidden">, sqa.org.uk</span></a>{% else %}<span class="paper-link-missing">No marking instructions</span>{% endif %}</li>
   </ul>
 </article>

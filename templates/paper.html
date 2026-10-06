@@ -7,32 +7,34 @@
   (paper.year|string, url_for('browse.year', level=paper.level, subject_slug=paper.subject_slug, year=paper.year)),
   (paper.title, None)] %}{% include "partials/breadcrumbs.html" %}{% endwith %}{% endblock %}
 {% block content %}
-<article id="paper-detail" class="paper-detail">
-  <h1 class="paper-title">{{ level_name }} {{ paper.subject_name }} {{ paper.year }}: {{ paper.title }}</h1>
-  <dl class="paper-meta">
-    <dt>Level</dt><dd class="paper-meta-level">{{ level_name }}</dd>
-    <dt>Subject</dt><dd class="paper-meta-subject">{{ paper.subject_name }}</dd>
-    <dt>Year</dt><dd class="paper-meta-year">{{ paper.year }}</dd>
-    <dt>Paper</dt><dd class="paper-meta-number">{{ paper.paper_number }}</dd>
-  </dl>
-  <section class="paper-documents" aria-labelledby="documents-heading">
-    <h2 id="documents-heading">Documents</h2>
-    <ul class="paper-links">
-      <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper (PDF, sqa.org.uk)</a></li>
-      <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions (PDF, sqa.org.uk)</a>{% else %}Marking instructions not published by SQA{% endif %}</li>
-    </ul>
-  </section>
-  {% if files %}
-  <section class="paper-extras" aria-labelledby="extras-heading">
-    <h2 id="extras-heading">Other files for this paper</h2>
-    <ul class="paper-extra-list">
-      {% for f in files %}
-      <li class="paper-extra paper-extra-{{ f.file_type|lower }}"><a href="{{ f.url }}" rel="noopener">{{ f.label }} ({{ f.file_type }}, sqa.org.uk)</a></li>
-      {% endfor %}
-    </ul>
-  </section>
-  {% endif %}
-</article>
-{% include "partials/chat_panel.html" %}
+<div class="paper-layout">
+  <article id="paper-detail" class="paper-detail">
+    <h1 class="paper-title">{{ level_name }} {{ paper.subject_name }} {{ paper.year }}: <em>{{ paper.title }}</em></h1>
+    <dl class="paper-meta">
+      <div><dt>Level</dt><dd class="paper-meta-level">{{ level_name }}</dd></div>
+      <div><dt>Subject</dt><dd class="paper-meta-subject">{{ paper.subject_name }}</dd></div>
+      <div><dt>Year</dt><dd class="paper-meta-year">{{ paper.year }}</dd></div>
+      <div><dt>Paper</dt><dd class="paper-meta-number">{{ paper.paper_number }}</dd></div>
+    </dl>
+    <section class="paper-documents" aria-labelledby="documents-heading">
+      <h2 id="documents-heading">Documents</h2>
+      <ul class="paper-links">
+        <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper <span class="file-meta">PDF · sqa.org.uk ↗</span></a></li>
+        <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions <span class="file-meta">PDF · sqa.org.uk ↗</span></a>{% else %}<span>Marking instructions not published by SQA</span>{% endif %}</li>
+      </ul>
+    </section>
+    {% if files %}
+    <section class="paper-extras" aria-labelledby="extras-heading">
+      <h2 id="extras-heading">Other files for this paper</h2>
+      <ul class="paper-extra-list">
+        {% for f in files %}
+        <li class="paper-extra paper-extra-{{ f.file_type|lower }}"><a href="{{ f.url }}" rel="noopener">{{ f.label }} <span class="file-meta">{{ f.file_type }} ↗<span class="visually-hidden">, sqa.org.uk</span></span></a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+  </article>
+  {% include "partials/chat_panel.html" %}
+</div>
 {% endblock %}
 {% block scripts %}<script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>{% endblock %}
