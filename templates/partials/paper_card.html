@@ -8,7 +8,7 @@
     </a>
   </h3>
   <ul class="paper-links">
-    <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper <span class="file-meta">PDF</span><span class="visually-hidden">, sqa.org.uk</span></a></li>
-    <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions <span class="file-meta">PDF</span><span class="visually-hidden">, sqa.org.uk</span></a>{% else %}<span class="paper-link-missing">No marking instructions</span>{% endif %}</li>
+    <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" target="_blank" rel="noopener">Question paper <span class="file-meta">PDF</span><span class="visually-hidden">, sqa.org.uk</span><span class="visually-hidden"> (opens in new tab)</span></a></li>
+    <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" target="_blank" rel="noopener">Marking instructions <span class="file-meta">PDF</span><span class="visually-hidden">, sqa.org.uk</span><span class="visually-hidden"> (opens in new tab)</span></a>{% else %}<span class="paper-link-missing">No marking instructions</span>{% endif %}</li>
   </ul>
 </article>

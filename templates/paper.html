@@ -19,8 +19,8 @@
     <section class="paper-documents" aria-labelledby="documents-heading">
       <h2 id="documents-heading">Documents</h2>
       <ul class="paper-links">
-        <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" rel="noopener">Question paper <span class="file-meta">PDF · sqa.org.uk ↗</span></a></li>
-        <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" rel="noopener">Marking instructions <span class="file-meta">PDF · sqa.org.uk ↗</span></a>{% else %}<span>Marking instructions not published by SQA</span>{% endif %}</li>
+        <li class="paper-link paper-link-qp"><a href="{{ paper.qp_url }}" target="_blank" rel="noopener">Question paper <span class="file-meta">PDF · sqa.org.uk ↗</span><span class="visually-hidden"> (opens in new tab)</span></a></li>
+        <li class="paper-link paper-link-mi">{% if paper.mi_url %}<a href="{{ paper.mi_url }}" target="_blank" rel="noopener">Marking instructions <span class="file-meta">PDF · sqa.org.uk ↗</span><span class="visually-hidden"> (opens in new tab)</span></a>{% else %}<span>Marking instructions not published by SQA</span>{% endif %}</li>
       </ul>
     </section>
     {% if files %}
@@ -28,7 +28,7 @@
       <h2 id="extras-heading">Other files for this paper</h2>
       <ul class="paper-extra-list">
         {% for f in files %}
-        <li class="paper-extra paper-extra-{{ f.file_type|lower }}"><a href="{{ f.url }}" rel="noopener">{{ f.label }} <span class="file-meta">{{ f.file_type }} ↗<span class="visually-hidden">, sqa.org.uk</span></span></a></li>
+        <li class="paper-extra paper-extra-{{ f.file_type|lower }}"><a href="{{ f.url }}" target="_blank" rel="noopener">{{ f.label }} <span class="file-meta">{{ f.file_type }} ↗<span class="visually-hidden">, sqa.org.uk</span></span><span class="visually-hidden"> (opens in new tab)</span></a></li>
         {% endfor %}
       </ul>
     </section>

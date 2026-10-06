@@ -13,7 +13,7 @@
     <ul class="coursework-list">
       {% for item in group %}
       <li class="coursework-item" id="coursework-{{ item.id }}">
-        <a class="coursework-doc" href="{{ item.url }}" rel="noopener">{{ item.title }} (sqa.org.uk)</a>
+        <a class="coursework-doc" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }} (sqa.org.uk)<span class="visually-hidden"> (opens in new tab)</span></a>
         {% if item.description %}<p class="coursework-description">{{ item.description }}</p>{% endif %}
         {% if item.deadline %}<p class="coursework-deadline">Deadline: <time datetime="{{ item.deadline }}">{{ item.deadline }}</time></p>{% endif %}
       </li>

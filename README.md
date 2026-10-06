@@ -4,8 +4,10 @@ Personal revision site for SQA National 5, Higher and Advanced Higher: past
 papers by level → subject → year → paper, coursework guidance, search, and a
 placeholder AI tutor chat panel.
 
-No CSS is included yet; templates use semantic HTML with stable classes/IDs
-(`.paper-list`, `.paper-card`, `#chat-panel`, `#chat-messages`, `#search-form`, …).
+Styled with the "Exam Paper" theme in `static/css/style.css`, with light and dark
+modes. Templates use semantic HTML with stable classes/IDs (`.paper-list`,
+`.paper-card`, `#chat-panel`, `#chat-messages`, `#search-form`, …) that the CSS
+targets.
 
 ## Setup
 
@@ -49,9 +51,22 @@ routes/browse.py             /, /<level>/, /<level>/<subject>/, /<level>/<subjec
 routes/coursework.py         /<level>/<subject>/coursework
 routes/search.py             /search?level=&subject=&year=
 templates/base.html          shared layout
-templates/partials/          breadcrumbs, paper_card, chat_panel
+templates/partials/          breadcrumbs, paper_card, chat_panel, settings_panel
+static/css/style.css         "Exam Paper" theme; colour tokens on :root, dark overrides on [data-theme="dark"]
 static/js/chat.js            chat panel behaviour
+static/js/theme.js           Settings panel and light/dark switching
 ```
+
+## Appearance
+
+The Settings button in the header opens a panel with three options:
+**System default**, **Light** and **Dark**. The choice is saved in
+`localStorage` under `theme` (`"light"` or `"dark"`; no key means follow the
+device). An inline script in `base.html` applies it before the page paints.
+If storage is blocked, the choice still applies until you leave the page.
+
+Fonts (Newsreader, IBM Plex Sans, IBM Plex Mono) load from Google Fonts. This is
+the site's only external request; offline, the system fallback fonts are used.
 
 ## Chat panel
 
