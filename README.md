@@ -40,6 +40,24 @@ papers (SQA publishes none separately) or 2026 papers not yet released. SQA
 publishes no coursework deadlines or guidance text; the `coursework.description`
 and `deadline` columns are there for you to fill in by hand.
 
+### Updating the papers
+
+The scrape never runs automatically, and the site makes no requests to SQA
+while it's running. Run the scrape manually:
+
+- once a year, in the autumn, when SQA publishes the new year's papers
+- again later if that year's marking instructions weren't out yet
+
+```sh
+source .venv/bin/activate
+python scrape_sqa.py    # rewrites data/sqa_papers.json (~2 min)
+python seed.py          # rebuilds revision.db from it
+git add data/sqa_papers.json && git commit -m "Update SQA papers"
+```
+
+`seed.py` prints how many papers still have no marking instructions. A drop
+in that number means newly released MIs were picked up.
+
 ## Layout
 
 ```
